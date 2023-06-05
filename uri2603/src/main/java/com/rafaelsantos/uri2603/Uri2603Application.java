@@ -24,10 +24,20 @@ public class Uri2603Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		System.out.println("---SQL RESULT---");
 		List<CustomerMinProjection> list = repository.sqlSearch("Porto Alegre");
 		List<CustomerMinDTO> sqlResult = list.stream().map(x -> new CustomerMinDTO(x)).collect(Collectors.toList());
 
 		for (CustomerMinDTO obj : sqlResult) {
+			System.out.println(obj);
+		}
+
+		System.out.println("\n\n");
+
+		System.out.println("---JPQL RESULT---");
+		List<CustomerMinDTO> jpqlResult = repository.jpqlSearch("Porto Alegre");
+		for (CustomerMinDTO obj : jpqlResult) {
 			System.out.println(obj);
 		}
 	}
